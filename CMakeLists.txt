@@ -2596,20 +2596,20 @@ function(install_manpage_symlink SOURCE TARGET MANDIR)
     endif(MINGW)
 
     install(CODE
-        "message(STATUS \"Symlinking: \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/${MANDIR}/${SOURCE} to ${TARGET}\")
+        "message(STATUS \"Symlinking: \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/${MANDIR}/${SOURCE} to ${TARGET}\")
          execute_process(
             COMMAND \"${CMAKE_COMMAND}\" \"-E\" \"remove\" \"${TARGET}\"
-            WORKING_DIRECTORY \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/${MANDIR}
+            WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/${MANDIR}
           )
          execute_process(
             COMMAND ${LINK_COMMAND}
-            WORKING_DIRECTORY \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/${MANDIR}
+            WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/${MANDIR}
             RESULT_VARIABLE EXIT_STATUS
           )
           if(NOT EXIT_STATUS EQUAL 0)
-              message(FATAL_ERROR \"Could not create symbolic link from ${CMAKE_INSTALL_PREFIX}/${MANDIR}/${SOURCE} to ${TARGET}\")
+              message(FATAL_ERROR \"Could not create symbolic link from \${CMAKE_INSTALL_PREFIX}/${MANDIR}/${SOURCE} to ${TARGET}\")
           endif()
-          set(CMAKE_INSTALL_MANIFEST_FILES \${CMAKE_INSTALL_MANIFEST_FILES} ${CMAKE_INSTALL_PREFIX}/${MANDIR}/${TARGET})")
+          set(CMAKE_INSTALL_MANIFEST_FILES \${CMAKE_INSTALL_MANIFEST_FILES} \${CMAKE_INSTALL_PREFIX}/${MANDIR}/${TARGET})")
 endfunction(install_manpage_symlink)
 
 set(MAN1_NOEXPAND pcap-config.1)
